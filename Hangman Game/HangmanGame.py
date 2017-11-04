@@ -304,6 +304,14 @@ mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ra
 rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger
 toad trout turkey turtle weasel whale wolf wombat zebra'''.split()
 
+WORDS = ''' cereal.crackers.pancakes.pizza.waffles.chocolate.marshmallow.
+pudding.toffee.pastry.scones.juice.milkshake.smoothie.tea.coffee.custard.
+milkshake.tacos.burritos.yogurt.bagel.bread.croissant.sandwich.cheese.
+nachos.chips.biscuit.omelet.bacon.pasta.spaghetti.jelly.fudge.bubblegum.
+pretzel.popcorn.popsicles.quesadilla.fries.muffins.burgers.sausages.noodles.
+twinkies.'''.split(.)
+
+
 
 # ["dog", "cat", "frog", "pig"] 
 def get_random_word(word_list):
@@ -351,6 +359,9 @@ def play():
     missed_letters, correct_letters = "", ""
     secret_word = get_random_word(WORDS)
     stop_game = False
+    amount_of_games = 0
+    amount_of_won = 0
+    amount_of_lost = 0
     while not stop_game:
         # show drawing and blanks to player
         print_board(missed_letters, correct_letters, secret_word)
@@ -370,13 +381,19 @@ def play():
             i += 1
         if match:
             print("Yes! The secret word is " + secret_word + "! You win!")
+            amount_of_won += 1
+            amount_of_games += 1
             stop_game = True
         elif len(missed_letters) == len(HANGMAN_PICS):
             print_board(missed_letters, correct_letters, secret_word)
             print("You have run out of guesses!")
             print("After " + str(len(missed_letters)) + " missed guesses and " + str(len(correct_letters))
                   + " correct guesses, the secret word was " + secret_word)
+            amount_of_lost += 1
+            amount_of_lost += 1
             stop_game = True
+        print("You have played", amount_of_games, "games.")
+        print("You have won", amount_of_won, "games and have lost", amount_of_lost, "games.")
         if stop_game:
             if play_again():
                 missed_letters, correct_letters = "", ""
